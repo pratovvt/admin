@@ -1,0 +1,11 @@
+# IntelliJ project files
+*
+!config
+!database
+!public
+!src
+!Dockerfile
+!favicon.png
+!package.json
+!yarn.lock
+!tsconfig.json
