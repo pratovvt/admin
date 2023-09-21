@@ -1,0 +1,43 @@
+{
+  "kind": "collectionType",
+  "collectionName": "tariffs",
+  "info": {
+    "singularName": "tariff",
+    "pluralName": "tariffs",
+    "displayName": "Tariff",
+    "description": ""
+  },
+  "options": {
+    "draftAndPublish": false
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "name": {
+      "type": "string",
+      "required": true
+    },
+    "cost": {
+      "type": "biginteger",
+      "required": true
+    },
+    "permissions": {
+      "type": "enumeration",
+      "enum": [
+        "currency",
+        "coach",
+        "support",
+        "default"
+      ],
+      "default": "default"
+    },
+    "bot": {
+      "type": "relation",
+      "relation": "oneToOne",
+      "target": "api::bot.bot",
+      "inversedBy": "tariff"
+    },
+    "started_time": {
+      "type": "datetime"
+    }
+  }
+}

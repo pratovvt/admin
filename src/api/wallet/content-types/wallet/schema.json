@@ -1,0 +1,38 @@
+{
+  "kind": "collectionType",
+  "collectionName": "wallets",
+  "info": {
+    "singularName": "wallet",
+    "pluralName": "wallets",
+    "displayName": "Wallet",
+    "description": ""
+  },
+  "options": {
+    "draftAndPublish": false
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "client": {
+      "type": "relation",
+      "relation": "oneToOne",
+      "target": "api::client.client",
+      "inversedBy": "wallet"
+    },
+    "amount": {
+      "type": "biginteger",
+      "required": true,
+      "default": "0"
+    },
+    "currency": {
+      "type": "enumeration",
+      "enum": [
+        "USD",
+        "RUB",
+        "SOM",
+        "SUM",
+        "KZT"
+      ],
+      "default": "RUB"
+    }
+  }
+}
