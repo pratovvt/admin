@@ -4,7 +4,8 @@
   "info": {
     "singularName": "client",
     "pluralName": "clients",
-    "displayName": "Clients"
+    "displayName": "Clients",
+    "description": ""
   },
   "options": {
     "draftAndPublish": false
@@ -46,6 +47,27 @@
       "relation": "oneToOne",
       "target": "api::wallet.wallet",
       "mappedBy": "client"
+    },
+    "auth": {
+      "type": "relation",
+      "relation": "oneToOne",
+      "target": "api::auth.auth",
+      "mappedBy": "client"
+    },
+    "status": {
+      "type": "enumeration",
+      "enum": [
+        "blocked",
+        "active",
+        "pending"
+      ]
+    },
+    "role": {
+      "type": "enumeration",
+      "enum": [
+        "admin",
+        "client"
+      ]
     }
   }
 }

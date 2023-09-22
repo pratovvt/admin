@@ -676,6 +676,33 @@ export interface PluginUsersPermissionsUser extends Schema.CollectionType {
   };
 }
 
+export interface ApiAuthAuth extends Schema.CollectionType {
+  collectionName: 'auths';
+  info: {
+    singularName: 'auth';
+    pluralName: 'auths';
+    displayName: 'Auth';
+    description: '';
+  };
+  options: {
+    draftAndPublish: false;
+  };
+  attributes: {
+    expiresAt: Attribute.DateTime;
+    client: Attribute.Relation<
+      'api::auth.auth',
+      'oneToOne',
+      'api::client.client'
+    >;
+    createdAt: Attribute.DateTime;
+    updatedAt: Attribute.DateTime;
+    createdBy: Attribute.Relation<'api::auth.auth', 'oneToOne', 'admin::user'> &
+      Attribute.Private;
+    updatedBy: Attribute.Relation<'api::auth.auth', 'oneToOne', 'admin::user'> &
+      Attribute.Private;
+  };
+}
+
 export interface ApiBotBot extends Schema.CollectionType {
   collectionName: 'bots';
   info: {
@@ -698,11 +725,66 @@ export interface ApiBotBot extends Schema.CollectionType {
       'api::tariff.tariff'
     >;
     status: Attribute.Boolean;
+    bot_setting: Attribute.Relation<
+      'api::bot.bot',
+      'oneToOne',
+      'api::bot-setting.bot-setting'
+    >;
     createdAt: Attribute.DateTime;
     updatedAt: Attribute.DateTime;
     createdBy: Attribute.Relation<'api::bot.bot', 'oneToOne', 'admin::user'> &
       Attribute.Private;
     updatedBy: Attribute.Relation<'api::bot.bot', 'oneToOne', 'admin::user'> &
+      Attribute.Private;
+  };
+}
+
+export interface ApiBotSettingBotSetting extends Schema.CollectionType {
+  collectionName: 'bot_settings';
+  info: {
+    singularName: 'bot-setting';
+    pluralName: 'bot-settings';
+    displayName: 'BotSetting';
+    description: '';
+  };
+  options: {
+    draftAndPublish: false;
+  };
+  attributes: {
+    background: Attribute.String;
+    headerBgColor: Attribute.String;
+    headerFontColor: Attribute.String;
+    botBubbleColor: Attribute.String;
+    botFontColor: Attribute.String;
+    userBubbleColor: Attribute.String;
+    userFontColor: Attribute.String;
+    backImageNotification: Attribute.String;
+    backImageAlert: Attribute.String;
+    backImageDanger: Attribute.String;
+    backImageHappyBirth: Attribute.String;
+    backImageDefault: Attribute.String;
+    coinsImage: Attribute.String;
+    coinsText: Attribute.String;
+    avatar: Attribute.String;
+    name: Attribute.String;
+    bot: Attribute.Relation<
+      'api::bot-setting.bot-setting',
+      'oneToOne',
+      'api::bot.bot'
+    >;
+    createdAt: Attribute.DateTime;
+    updatedAt: Attribute.DateTime;
+    createdBy: Attribute.Relation<
+      'api::bot-setting.bot-setting',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+    updatedBy: Attribute.Relation<
+      'api::bot-setting.bot-setting',
+      'oneToOne',
+      'admin::user'
+    > &
       Attribute.Private;
   };
 }
@@ -713,6 +795,7 @@ export interface ApiClientClient extends Schema.CollectionType {
     singularName: 'client';
     pluralName: 'clients';
     displayName: 'Clients';
+    description: '';
   };
   options: {
     draftAndPublish: false;
@@ -738,6 +821,13 @@ export interface ApiClientClient extends Schema.CollectionType {
       'oneToOne',
       'api::wallet.wallet'
     >;
+    auth: Attribute.Relation<
+      'api::client.client',
+      'oneToOne',
+      'api::auth.auth'
+    >;
+    status: Attribute.Enumeration<['blocked', 'active', 'pending']>;
+    role: Attribute.Enumeration<['admin', 'client']>;
     createdAt: Attribute.DateTime;
     updatedAt: Attribute.DateTime;
     createdBy: Attribute.Relation<
@@ -911,7 +1001,9 @@ declare module '@strapi/strapi' {
       'plugin::users-permissions.permission': PluginUsersPermissionsPermission;
       'plugin::users-permissions.role': PluginUsersPermissionsRole;
       'plugin::users-permissions.user': PluginUsersPermissionsUser;
+      'api::auth.auth': ApiAuthAuth;
       'api::bot.bot': ApiBotBot;
+      'api::bot-setting.bot-setting': ApiBotSettingBotSetting;
       'api::client.client': ApiClientClient;
       'api::coin.coin': ApiCoinCoin;
       'api::company.company': ApiCompanyCompany;

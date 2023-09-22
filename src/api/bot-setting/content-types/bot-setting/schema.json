@@ -1,0 +1,70 @@
+{
+  "kind": "collectionType",
+  "collectionName": "bot_settings",
+  "info": {
+    "singularName": "bot-setting",
+    "pluralName": "bot-settings",
+    "displayName": "BotSetting",
+    "description": ""
+  },
+  "options": {
+    "draftAndPublish": false
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "background": {
+      "type": "string"
+    },
+    "headerBgColor": {
+      "type": "string"
+    },
+    "headerFontColor": {
+      "type": "string"
+    },
+    "botBubbleColor": {
+      "type": "string"
+    },
+    "botFontColor": {
+      "type": "string"
+    },
+    "userBubbleColor": {
+      "type": "string"
+    },
+    "userFontColor": {
+      "type": "string"
+    },
+    "backImageNotification": {
+      "type": "string"
+    },
+    "backImageAlert": {
+      "type": "string"
+    },
+    "backImageDanger": {
+      "type": "string"
+    },
+    "backImageHappyBirth": {
+      "type": "string"
+    },
+    "backImageDefault": {
+      "type": "string"
+    },
+    "coinsImage": {
+      "type": "string"
+    },
+    "coinsText": {
+      "type": "string"
+    },
+    "avatar": {
+      "type": "string"
+    },
+    "name": {
+      "type": "string"
+    },
+    "bot": {
+      "type": "relation",
+      "relation": "oneToOne",
+      "target": "api::bot.bot",
+      "inversedBy": "bot_setting"
+    }
+  }
+}

@@ -45,6 +45,12 @@
     },
     "status": {
       "type": "boolean"
+    },
+    "bot_setting": {
+      "type": "relation",
+      "relation": "oneToOne",
+      "target": "api::bot-setting.bot-setting",
+      "mappedBy": "bot"
     }
   }
 }
